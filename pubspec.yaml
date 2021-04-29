@@ -45,6 +45,9 @@ dependencies:
   path: ^1.7.0
   syncfusion_flutter_charts: ^18.4.47
   flutter_email_sender: ^4.0.0
+  ml_dataframe: ^0.4.0
+  ml_preprocessing: ^5.2.2
+  ml_algo: ^15.6.7
 
 dev_dependencies:
   flutter_test:
