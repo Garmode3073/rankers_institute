@@ -198,7 +198,6 @@ class _TeaHomeState extends State<TeaHome> {
                                         FlatButton(
                                           child: Text('Add'),
                                           onPressed: () {
-                                            g.leclink.clear();
                                             if (classid == null ||
                                                 g.leclink.text.isEmpty) {
                                               setState(() {

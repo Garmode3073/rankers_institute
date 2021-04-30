@@ -6,6 +6,7 @@ import 'package:rankers_institute/screens/smsubs.dart';
 import 'package:rankers_institute/screens/studbt.dart';
 import 'package:rankers_institute/services/dbser.dart';
 import 'package:rankers_institute/screens/smclasses.dart';
+import 'package:rankers_institute/services/mlhelper.dart';
 import 'package:rankers_institute/widgets/hpimg.dart';
 import 'package:rankers_institute/globals.dart' as g;
 import 'package:rankers_institute/widgets/loading.dart';
@@ -39,6 +40,7 @@ class _StuHomeState extends State<StuHome> {
                             isload = true;
                             setState(() {});
                             final Map testdata = {};
+                            List allTest = [];
                             List allS = await DatabaseServices(uid: g.uid)
                                 .allSubs(g.stuGlob.classId);
                             for (int i = 0; i < allS.length; i++) {
@@ -46,8 +48,18 @@ class _StuHomeState extends State<StuHome> {
                                   .getTest('subjectID', allS[i]['subject']);
                               if (v.isNotEmpty) {
                                 testdata[allS[i]['subject']] = v;
+                                allTest += v;
                               }
                             }
+                            int mar = 0;
+                            for (int i = 0; i < allTest.length; i++) {
+                              mar = mar + allTest[i].marks;
+                            }
+                            int c = await DatabaseServices(uid: g.uid)
+                                .getDoubtCount(g.uid);
+                            var mlh = MLHelper()
+                                .studentSide([c, mar / allTest.length]);
+                            print(mlh);
                             isload = false;
                             Navigator.push(
                               context,
@@ -56,6 +68,8 @@ class _StuHomeState extends State<StuHome> {
                                           secondaryAnimation) =>
                                       StuAnalysis(
                                         testd: testdata,
+                                        doubtCount: c,
+                                        allM: mlh,
                                       )),
                             );
                           },
