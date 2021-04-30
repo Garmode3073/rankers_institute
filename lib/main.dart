@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rankers_institute/globals.dart' as g;
 import 'package:rankers_institute/screens/errorscr.dart';
 import 'package:rankers_institute/screens/frontPage.dart';
+import 'package:rankers_institute/services/mlhelper.dart';
 import 'package:rankers_institute/widgets/loading.dart';
 
 void main() {
@@ -60,6 +61,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    MLHelper().train();
+  }
+
   @override
   Widget build(BuildContext context) {
     //for once giving the screen width and height to global variables

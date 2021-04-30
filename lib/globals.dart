@@ -76,3 +76,5 @@ TextStyle adduserstyles(color) => TextStyle(
     );
 
 List allss;
+
+var model;
