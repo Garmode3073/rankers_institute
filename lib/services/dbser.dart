@@ -207,6 +207,15 @@ class DatabaseServices {
     });
   }
 
+  //get doubtcount
+  Future getDoubtCount(stuID) async {
+    return await FirebaseFirestore.instance
+        .collection('doubt')
+        .where('studentID', isEqualTo: stuID)
+        .get()
+        .then((value) => value.docs.length);
+  }
+
   //add notice
   Future addNotice(detail, dtitle, file) async {
     DateTime now = new DateTime.now();
